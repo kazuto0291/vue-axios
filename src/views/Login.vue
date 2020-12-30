@@ -12,7 +12,7 @@
 </template>
 
 <script>
-
+import axios from '../axios-auth';
 
 export default {
   data() {
@@ -22,7 +22,20 @@ export default {
     };
   },
   methods: {
-    login() {}
+    login() {
+      axios.post(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDtRVsU0Scbfku9UkUFbDoRoeTopnSdFb8',
+        {
+          email: this.email,
+          password: this.password,
+          returnSecureToken: true
+        }
+      ).then(response => {
+        console.log(response);
+      });
+      this.email ="";
+      this.password = "";
+    }
   }
 }
 </script>

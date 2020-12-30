@@ -5,7 +5,7 @@ import router from './router'
 
 Vue.config.productionTip = false
 
-axios.defaults.baseURL ="https://firestore.googleapis.com/v1/projects//databases/(default)/documents";
+axios.defaults.baseURL ="https://firestore.googleapis.com/v1/projects/vue-http-7c2f0/databases/(default)/documents";
 // axios.defaults.headers.common["Authorization"] = "flajflajlfjaf";
 // axios.defaults.headers.get["Accept"] = "application/json"
 
