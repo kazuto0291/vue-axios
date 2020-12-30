@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Comments from './views/Comments.vue';
 import Login from './views/Login.vue';
 import Register from './views/Register.vue';
+import store from './store';
 
 Vue.use(Router);
 
@@ -11,15 +12,40 @@ export default new Router ({
   routes: [
     {
       path: '/',
-      component: Comments
+      component: Comments,
+      beforeEnter(to, from, next) {
+        // idTokenがないとアクセスできないを記述したい
+        if (store.getters.idToken) {
+          next();
+        } else {
+          // idTokenがないならloginページへ飛ばす
+          next('login');
+        }
+      }
     },
     {
       path: '/login',
-      component: Login
+      component: Login,
+      beforeEnter(to, from, next) {
+        if (store.getters.idToken) {
+          // idTokenがあったら掲示板ページに飛ばす
+          next('/')
+        } else {
+          // idTokengaなかったらloginページにアクセスできる
+          next();
+        }
+      }
     },
     {
       path: '/register',
-      component: Register
+      component: Register,
+      beforeEnter(to, from, next) {
+        if (store.getters.idToken) {
+          next('/');
+        } else {
+          next();
+        }
+      }
     },
   ]
 });

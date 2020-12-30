@@ -1,12 +1,16 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from '../axios-auth'
+import axios from '../axios-auth';
+import router from '../router';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     idToken: null
+  },
+  getters: {
+    idToken: state => state.idToken
   },
   mutations: {
     updateIdToken(state, idToken) {
@@ -24,6 +28,7 @@ export default new Vuex.Store({
         }
       ).then(response => {
         commit('updateIdToken', response.data.idToken);
+        router.push('/')
         console.log(response);
       })
     },
@@ -37,6 +42,7 @@ export default new Vuex.Store({
         }
       ).then(response => {
         commit('updateIdToken', response.data.idToken)
+        router.push('/');
         console.log(response)
       })
     }
