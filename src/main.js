@@ -43,8 +43,12 @@ console.log(interceptorsResponse, 'interceptorsResponse')
 axios.interceptors.request.eject(interceptorsRequest);
 axios.interceptors.response.eject(interceptorsResponse);
 
-new Vue({
-  router,
-  store,
-  render: h => h(App),
-}).$mount('#app')
+// 最初にJsが読み込まれたときにautoLoginを実行しvueインスタンスにアクセスする.
+store.dispatch('autoLogin').then(() => {
+  new Vue({
+    router,
+    store,
+    render: h => h(App),
+  }).$mount('#app')
+})
+
