@@ -18,6 +18,8 @@
 
 <script>
 import axios from "axios";
+// import axiosAuth from "./axios-auth";
+
 
 export default {
   data() {
@@ -32,6 +34,9 @@ export default {
     .then(response => {
       this.posts = response.data.documents;
       console.log(response.data.documents);
+    })
+    .catch(() => {
+      // おしゃれなUI
     })
   },
   methods: {
